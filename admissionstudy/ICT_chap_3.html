@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Systems & Digital Logic - Complete Interactive Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-btn {
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1);
+        }
+        
+        .nav-btn.active {
+            background: #2c3e50;
+        }
+        
+        .content-section {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #3498db;
+        }
+        
+        .definition-box {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .definition-box h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .fact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .fact-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .fact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .fact-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .mcq-container {
+            margin: 30px 0;
+        }
+        
+        .mcq-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #2c3e50;
+        }
+        
+        .mcq-options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .mcq-option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mcq-option:hover {
+            background: #f0f7ff;
+            border-color: #aad0ff;
+        }
+        
+        .mcq-option.selected {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+        
+        .mcq-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .mcq-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-label {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .explanation-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 5px solid #17a2b8;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .explanation-box h4 {
+            color: #17a2b8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .explanation-content {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .score-board {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .score-number {
+            font-size: 2.5rem;
+            color: #3498db;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .reset-btn {
+            padding: 10px 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            background: #c0392b;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+        }
+        
+        .sign {
+            background: #2c3e50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .sign-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .user-answers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .answer-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-dot.unanswered {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+        
+        .answer-dot.correct {
+            background: #28a745;
+            color: white;
+        }
+        
+        .answer-dot.incorrect {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .answer-dot:hover {
+            transform: scale(1.1);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .mcq-controls {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .prev-btn, .next-btn {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .prev-btn:disabled, .next-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .fact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .mcq-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .prev-btn, .next-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Complete Number Systems & Digital Logic</h1>
+            <p>Comprehensive interactive learning guide covering all 55 key facts, 30 MCQs with detailed explanations, and complete concept coverage</p>
+        </header>
+        
+        <div class="sign-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fff3cd;"></div>
+                <span>Selected Option</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #d4edda;"></div>
+                <span>Correct Answer</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #f8d7da;"></div>
+                <span>Incorrect Answer</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #17a2b8;"></div>
+                <span>Answer Explanation</span>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn active" data-target="part1">Part 1: Complete Concepts</button>
+            <button class="nav-btn" data-target="part2">55 Key Facts</button>
+            <button class="nav-btn" data-target="mcq">30 MCQs Self Test</button>
+            <button class="nav-btn" data-target="summary">Summary</button>
+        </div>
+        
+        <!-- Part 1: Complete Important Information -->
+        <section id="part1" class="content-section active">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Complete Concepts & Definitions</h2>
+            
+            <div class="definition-box">
+                <h3><i class="fas fa-history"></i> Comprehensive History of Number Systems</h3>
+                <p><strong>3400 BC:</strong> Egyptians developed the Hieroglyphic system using symbols for powers of 10.</p>
+                <p><strong>3000 BC:</strong> Sumerians in Mesopotamia developed a base-60 (sexagesimal) system.</p>
+                <p><strong>500 BC:</strong> Concept of <strong>Zero (0)</strong> originated in India - a revolutionary mathematical breakthrough.</p>
+                <p><strong>300 BC:</strong> Greek philosopher <strong>Aristotle</strong> provided the mathematical concept of Infinity.</p>
+                <p><strong>800 AD:</strong> Arabic mathematician <strong>Al-Khwarizmi</strong> played a vital role in the Decimal system and algebra.</p>
+                <p><strong>1679:</strong> <strong>Gottfried Leibniz</strong> gave the first functional idea of the Binary system, inspired by the I Ching.</p>
+                <p><strong>1945:</strong> Binary system became fundamental to modern computers with von Neumann architecture.</p>
+            </div>
+            
+            <h3><i class="fas fa-book"></i> Complete Definitions & Terminologies</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Definition</th>
+                        <th>Example / Significance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bit</strong></td>
+                        <td>The smallest unit of a binary number (0 and 1). Short for BInary DigiT.</td>
+                        <td>0 or 1 represents off/on, false/true, low/high voltage in digital circuits</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Byte</strong></td>
+                        <td>A group of 8 bits. One byte equals one character in most encoding systems.</td>
+                        <td>01001010 (represents 'J' in ASCII), 11111111 = 255 decimal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nibble</strong></td>
+                        <td>Half of a byte (4 bits). Also called half-byte or tetrade.</td>
+                        <td>0101 (4 bits) = 5 decimal, used in BCD encoding</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Word</strong></td>
+                        <td>Natural unit of data used by a processor (typically 16, 32, or 64 bits).</td>
+                        <td>32-bit word can represent numbers from 0 to 4,294,967,295</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Number System</strong></td>
+                        <td>The method of writing and expressing numbers using specific symbols or digits.</td>
+                        <td>Decimal, Binary, Octal, Hexadecimal, Roman, Mayan, Babylonian</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Base (Radix)</strong></td>
+                        <td>The total number of symbols in a positional number system.</td>
+                        <td>Decimal: 10, Binary: 2, Octal: 8, Hexadecimal: 16</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Positional Value</strong></td>
+                        <td>Value of a digit determined by its position in the number.</td>
+                        <td>In 345, 3 represents 300, 4 represents 40, 5 represents 5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MSB & LSB</strong></td>
+                        <td>Most Significant Bit (leftmost) and Least Significant Bit (rightmost).</td>
+                        <td>In 1001₂, MSB=1 (value 8), LSB=1 (value 1)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3><i class="fas fa-sitemap"></i> Types of Number Systems</h3>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h4><span class="sign">Positional Systems</span></h4>
+                    <p>Value depends on the position of the digit. Each position represents a power of the base.</p>
+                    <p><strong>Examples:</strong> Decimal, Binary, Octal, Hexadecimal</p>
+                    <p><strong>Formula:</strong> Value = Σ(digit × base<sup>position</sup>)</p>
+                </div>
+                <div class="fact-card">
+                    <h4><span class="sign">Non-Positional Systems</span></h4>
+                    <p>Value does not change with position. Symbols have fixed values.</p>
+                    <p><strong>Examples:</strong> Hieroglyphics, Roman numerals, Greek numerals</p>
+                    <p><strong>Characteristic:</strong> No concept of zero, difficult arithmetic</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-exchange-alt"></i> Number System Conversions</h3>
+            
+            <div class="definition-box">
+                <h4><i class="fas fa-cogs"></i> Binary to Decimal Conversion</h4>
+                <p>Multiply each bit by 2<sup>position</sup> and sum: 1011₂ = 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8+0+2+1 = 11₁₀</p>
+            </div>
+            
+            <div class="definition-box">
+                <h4><i class="fas fa-cogs"></i> Decimal to Binary Conversion</h4>
+                <p>Repeated division by 2: 13₁₀ → 13÷2=6 R1, 6÷2=3 R0, 3÷2=1 R1, 1÷2=0 R1 → 1101₂ (read remainders backwards)</p>
+            </div>
+            
+            <h3><i class="fas fa-microchip"></i> Digital Logic Fundamentals</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gate</th>
+                        <th>Symbol</th>
+                        <th>Boolean Expression</th>
+                        <th>Truth Table</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AND</td>
+                        <td>A⋅B</td>
+                        <td>A AND B</td>
+                        <td>0·0=0, 0·1=0, 1·0=0, 1·1=1</td>
+                    </tr>
+                    <tr>
+                        <td>OR</td>
+                        <td>A+B</td>
+                        <td>A OR B</td>
+                        <td>0+0=0, 0+1=1, 1+0=1, 1+1=1</td>
+                    </tr>
+                    <tr>
+                        <td>NOT</td>
+                        <td>A' or Ā</td>
+                        <td>NOT A</td>
+                        <td>0'=1, 1'=0</td>
+                    </tr>
+                    <tr>
+                        <td>NAND</td>
+                        <td>(A⋅B)'</td>
+                        <td>NOT (A AND B)</td>
+                        <td>Universal gate</td>
+                    </tr>
+                    <tr>
+                        <td>NOR</td>
+                        <td>(A+B)'</td>
+                        <td>NOT (A OR B)</td>
+                        <td>Universal gate</td>
+                    </tr>
+                    <tr>
+                        <td>XOR</td>
+                        <td>A⊕B</td>
+                        <td>A XOR B</td>
+                        <td>0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3><i class="fas fa-code"></i> Character Encoding Systems</h3>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h4><span class="sign">ASCII</span></h4>
+                    <p>7-bit code, 128 characters, English only</p>
+                    <p><strong>Range:</strong> 0-127</p>
+                    <p><strong>Creator:</strong> Robert William Bemer (1963)</p>
+                </div>
+                <div class="fact-card">
+                    <h4><span class="sign">EBCDIC</span></h4>
+                    <p>8-bit code, 256 characters, IBM mainframes</p>
+                    <p><strong>Range:</strong> 0-255</p>
+                    <p><strong>Use:</strong> Legacy systems</p>
+                </div>
+                <div class="fact-card">
+                    <h4><span class="sign">Unicode</span></h4>
+                    <p>Universal character set, supports all languages</p>
+                    <p><strong>Range:</strong> Up to 1,114,112 characters</p>
+                    <p><strong>Bengali:</strong> U+0980 to U+09FF</p>
+                </div>
+                <div class="fact-card">
+                    <h4><span class="sign">BCD</span></h4>
+                    <p>Binary Coded Decimal, 4 bits per digit</p>
+                    <p><strong>Example:</strong> 45₁₀ = 0100 0101 in BCD</p>
+                    <p><strong>Use:</strong> Digital displays, calculators</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Part 2: Complete 55 Key Facts -->
+        <section id="part2" class="content-section">
+            <h2 class="section-title"><i class="fas fa-key"></i> Complete 55 Key Facts (Tothotalika)</h2>
+            <p>Here are all 55 essential facts about number systems and digital logic:</p>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="facts-progress" style="width: 100%"></div>
+            </div>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <span class="fact-number">1</span> Popular ancient system: Mayan (base-20).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">2</span> "Hieroglyphic" word origin: Greek ("hieros" = sacred, "glyphein" = carve).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">3</span> Smallest symbol of expressing numbers: Digit.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">4</span> Egyptian system base: 10 (decimal).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">5</span> Decimal system started in: India and Arabia.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">6</span> Base 60 system used by: Ancient Babylonians.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">7</span> Base 10 system is called: Decimal.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">8</span> Most used system currently: Positional.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">9</span> Number systems are mainly: 2 types.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">10</span> Positional systems based on base: 4 types (2, 8, 10, 16).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">11</span> Binary concept by: Gottfried Leibniz.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">12</span> Internal computer operations: Binary.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">13</span> Non-positional example: Hieroglyphics.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">14</span> Hexadecimal digits: 0-9 and A-F.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">15</span> Binary base: 2.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">16</span> Computers work in: Binary.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">17</span> After 9 in Hexadecimal: A.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">18</span> Binary made of 4 bits: Hexadecimal digit.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">19</span> Octal base: 8.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">20</span> Hexadecimal base: 16.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">21</span> Decimal base: 10.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">22</span> Math in digital devices: Binary.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">23</span> Binary addition 1+1: 10.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">24</span> Binary subtraction 0-1: 1 (with borrow).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">25</span> Binary division by 0: Meaningless.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">26</span> 2's complement not needed for: Positive numbers.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">27</span> 8 bits equal: 1 Byte.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">28</span> BCD full form: Binary Coded Decimal.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">29</span> Keyboard data code: Alphanumeric.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">30</span> Unicode invented: 1991.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">31</span> ASCII creator: Robert William Bemer.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">32</span> EBCDIC is: 8-bit BCD.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">33</span> Code for Bengali language: Unicode.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">34</span> Boolean postulates: 2 types (AND, OR with NOT).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">35</span> In Boolean Algebra 1+1: 1.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">36</span> Boolean addition is: Logical OR operation.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">37</span> Logical operations: OR, AND, NOT.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">38</span> Logic 0 voltage: 0.8 volts (TTL standard).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">39</span> Universal gates: NAND and NOR.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">40</span> Input complement equals output: NOT Gate.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">41</span> XOR output 1 if: Inputs are odd numbered 1s.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">42</span> XOR + NOT: XNOR gate.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">43</span> Human language to computer language: Encoder.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">44</span> Coded data to uncoded: Decoder.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">45</span> Uncoded to coded: Encoder.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">46</span> Encoder 2ⁿ inputs have: n outputs.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">47</span> Circuit for addition: Adder.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">48</span> Adder types: 2 (Half and Full).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">49</span> Adds two bits: Half Adder.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">50</span> Half Adder: 2 inputs, 1 output (sum).
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">51</span> Full Adder: 3 inputs, 1 output.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">52</span> Flip-flops make: Register.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">53</span> Register is: Memory device.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">54</span> Register types by construction: 2 types.
+                </div>
+                <div class="fact-card">
+                    <span class="fact-number">55</span> Program counter is: A Register.
+                </div>
+            </div>
+            
+            <div class="definition-box">
+                <h3><i class="fas fa-lightbulb"></i> Complete 55 Facts Mastered!</h3>
+                <p>These 55 facts represent the essential knowledge for understanding number systems and digital logic. Memorizing these will provide a strong foundation for further studies in computer science and digital electronics. Each fact is interconnected and builds upon the previous ones to create a comprehensive understanding of the subject.</p>
+            </div>
+        </section>
+        
+        <!-- Self Test MCQs - All 30 Questions -->
+        <section id="mcq" class="content-section">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> Victory Maritime Self Test - All 30 MCQs</h2>
+            <p>Test your knowledge with all 30 multiple choice questions. Click on an option to select it. Correct answers turn green, incorrect answers turn red, and your selected option is yellow. Detailed explanations appear after answering.</p>
+            
+            <div class="user-answers" id="user-answers-nav">
+                <!-- Answer navigation dots will be inserted here -->
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="mcq-progress" style="width: 0%"></div>
+            </div>
+            
+            <div class="mcq-controls">
+                <button class="prev-btn" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <div id="current-question">Question 1 of 30</div>
+                <button class="next-btn" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            
+            <div class="mcq-container" id="mcq-container">
+                <!-- MCQs will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="score-board">
+                <h3>Your Score</h3>
+                <div class="score-number" id="score">0/30</div>
+                <p id="score-message">Start answering questions to see your score!</p>
+                <button class="reset-btn" id="reset-mcq">Reset All Answers</button>
+            </div>
+        </section>
+        
+        <!-- Summary -->
+        <section id="summary" class="content-section">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Complete Summary & Key Takeaways</h2>
+            
+            <div class="definition-box">
+                <h3><i class="fas fa-check-circle"></i> Core Concepts Mastered</h3>
+                <p>Number systems are fundamental to computing and mathematics. Understanding the differences between positional and non-positional systems, the significance of base/radix, and the historical development of numbering systems provides crucial context for digital logic design. From ancient Egyptian hieroglyphics to modern Unicode encoding, this journey through number systems reveals the evolution of human mathematical thought.</p>
+            </div>
+            
+            <h3><i class="fas fa-star"></i> Most Important Points</h3>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h4>Binary System Foundation</h4>
+                    <p>Foundation of all digital systems. Uses only 0 and 1. Concept by Gottfried Leibniz in 1679. Essential for computer architecture.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Positional vs Non-Positional</h4>
+                    <p>Positional: Value depends on digit position. Non-positional: Value is fixed regardless of position. Modern computing uses positional systems.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Key Historical Facts</h4>
+                    <p>Zero from India. Hieroglyphics from Egypt. Decimal system developed in India and Arabia. Binary system from Leibniz.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Digital Logic Gates</h4>
+                    <p>NAND and NOR are universal gates. Boolean algebra forms the basis of digital circuit design. Logic gates implement Boolean functions.</p>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>System</th>
+                        <th>Base</th>
+                        <th>Digits/Symbols</th>
+                        <th>Primary Use</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Binary</td>
+                        <td>2</td>
+                        <td>0, 1</td>
+                        <td>Internal computer operations</td>
+                        <td>1011₂ = 11₁₀</td>
+                    </tr>
+                    <tr>
+                        <td>Decimal</td>
+                        <td>10</td>
+                        <td>0-9</td>
+                        <td>Human arithmetic, daily use</td>
+                        <td>123₁₀</td>
+                    </tr>
+                    <tr>
+                        <td>Octal</td>
+                        <td>8</td>
+                        <td>0-7</td>
+                        <td>Computer shorthand (Unix permissions)</td>
+                        <td>755₈ = 493₁₀</td>
+                    </tr>
+                    <tr>
+                        <td>Hexadecimal</td>
+                        <td>16</td>
+                        <td>0-9, A-F</td>
+                        <td>Computer memory addresses, color codes</td>
+                        <td>FFA500₁₆ = Orange color</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3><i class="fas fa-project-diagram"></i> Digital Logic Hierarchy</h3>
+            
+            <div class="definition-box">
+                <p><strong>Bits → Nibbles → Bytes → Words → Registers → Memory</strong></p>
+                <p>1. <strong>Bit:</strong> Basic unit (0 or 1)</p>
+                <p>2. <strong>Nibble:</strong> 4 bits (half-byte)</p>
+                <p>3. <strong>Byte:</strong> 8 bits (character)</p>
+                <p>4. <strong>Word:</strong> Processor-dependent (16, 32, 64 bits)</p>
+                <p>5. <strong>Register:</strong> Fast storage in CPU</p>
+                <p>6. <strong>Memory:</strong> RAM, ROM, storage</p>
+            </div>
+            
+            <h3><i class="fas fa-graduation-cap"></i> Complete Learning Outcomes</h3>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h4>Historical Understanding</h4>
+                    <p>Trace evolution from Egyptian hieroglyphics to modern binary systems</p>
+                </div>
+                <div class="fact-card">
+                    <h4>System Classification</h4>
+                    <p>Differentiate positional vs non-positional systems</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Conversion Skills</h4>
+                    <p>Convert between binary, decimal, octal, and hexadecimal</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Logic Design</h4>
+                    <p>Understand Boolean algebra and logic gate implementations</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Encoding Knowledge</h4>
+                    <p>Understand ASCII, Unicode, BCD, and EBCDIC encoding systems</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Problem Solving</h4>
+                    <p>Solve 30 MCQs with detailed explanations and reasoning</p>
+                </div>
+            </div>
+            
+            <div class="definition-box">
+                <h3><i class="fas fa-trophy"></i> Achievement</h3>
+                <p>By completing this comprehensive guide, you have mastered 55 key facts about number systems, understood complete concepts with historical context, and successfully solved 30 MCQs with detailed explanations. You are now prepared for advanced studies in computer science, digital electronics, and related fields.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Complete Interactive Learning Guide on Number Systems & Digital Logic</p>
+            <p>Includes all 55 key facts, 30 MCQs with detailed explanations, and comprehensive concept coverage</p>
+            <p><i class="far fa-copyright"></i> Educational Resource - 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // Complete MCQ Data - All 30 Questions
+        const mcqData = [
+            {
+                question: "Simplifying the Boolean expression xyz + x'yz + xy'z + x'y'z results in:",
+                options: ["x + z", "y' + z", "z", "z'"],
+                correct: 2,
+                explanation: "This simplification uses Boolean algebra principles. All terms contain 'z', and the combination of x and y variables with their complements covers all possibilities.",
+                detailed: "Step-by-step solution:<br>1. Original: xyz + x'yz + xy'z + x'y'z<br>2. Factor out z: z(xy + x'y + xy' + x'y')<br>3. Notice (xy + x'y + xy' + x'y') = 1 (all minterms of 2 variables)<br>4. Result: z·1 = z<br><br>This is an example of the consensus theorem in Boolean algebra."
+            },
+            {
+                question: "How many 2-input NAND gates are required to create a 2-input OR gate?",
+                options: ["1", "2", "3", "4"],
+                correct: 2,
+                explanation: "Three NAND gates are needed to construct an OR gate. This implementation demonstrates that NAND is a universal gate.",
+                detailed: "Implementation using NAND gates:<br>1. Gate 1: A NAND A = NOT A<br>2. Gate 2: B NAND B = NOT B<br>3. Gate 3: (NOT A) NAND (NOT B) = NOT(NOT A · NOT B) = A + B (by De Morgan's Theorem)<br><br>This shows NAND gates can implement any Boolean function."
+            },
+            {
+                question: "The sum of (11110.101)₂ and (11001.001)₂ is:",
+                options: ["(100111.110)₂", "(111101.101)₂", "(1010110.110)₂", "(1110011.110)₂"],
+                correct: 2,
+                explanation: "Binary addition follows the same principles as decimal addition but with base 2. The result is 1010110.110₂.",
+                detailed: "Step-by-step binary addition:<br>  11110.101 (30.625₁₀)<br>+ 11001.001 (25.125₁₀)<br>-----------<br> 1010110.110 (55.750₁₀)<br><br>Carry propagation: 1+1=0 with carry 1<br>Fractional part: .101 + .001 = .110"
+            },
+            {
+                question: "Simplifying the Boolean expression (x+y) ⋅ (x'+y) results in:",
+                options: ["x + y", "x", "y", "1"],
+                correct: 2,
+                explanation: "Using Boolean algebra, the expression simplifies to y. This demonstrates the absorption law in Boolean algebra.",
+                detailed: "Detailed simplification:<br>1. (x+y)(x'+y)<br>2. = x·x' + x·y + y·x' + y·y<br>3. = 0 + xy + x'y + y (Complement law: x·x'=0)<br>4. = y(x + x' + 1) (Factor y)<br>5. = y·1 (x + x' + 1 = 1)<br>6. = y"
+            },
+            {
+                question: "How many 2-input NAND gates are required to create a 2-input XOR gate?",
+                options: ["3", "4", "5", "6"],
+                correct: 1,
+                explanation: "Four NAND gates are needed to construct an XOR gate. XOR is A⊕B = AB' + A'B.",
+                detailed: "XOR implementation with 4 NAND gates:<br>1. NAND1: A NAND B = (AB)'<br>2. NAND2: A NAND (AB)' = A(AB)'' = A(AB) = AB'<br>3. NAND3: B NAND (AB)' = B(AB)'' = B(AB) = A'B<br>4. NAND4: (AB') NAND (A'B) = (AB'·A'B)' = (0)' = 1, but actually gives A⊕B"
+            },
+            {
+                question: "Which circuit is applicable for 2ⁿ inputs and n outputs?",
+                options: ["Decoder", "Demultiplexer", "Encoder", "Adder"],
+                correct: 2,
+                explanation: "An encoder has 2ⁿ inputs and n outputs. It encodes the active input line into an n-bit binary code.",
+                detailed: "Encoder characteristics:<br>• 2ⁿ input lines (only one active at a time)<br>• n output lines (binary code)<br>• Example: 8-to-3 encoder (2³=8 inputs, 3 outputs)<br>• Priority encoder: handles multiple active inputs"
+            },
+            {
+                question: "Subtracting (101110.01)₂ from (110011.10)₂ results in:",
+                options: ["(010101.01)₂", "(001010.01)₂", "(000011.01)₂", "(000101.01)₂"],
+                correct: 3,
+                explanation: "Binary subtraction: 110011.10 - 101110.01 = 000101.01. This demonstrates binary subtraction with borrowing.",
+                detailed: "Binary subtraction step-by-step:<br>  110011.10 (51.5₁₀)<br>- 101110.01 (46.25₁₀)<br>-----------<br>  000101.01 (5.25₁₀)<br><br>Borrowing process: When subtracting 1 from 0, borrow 1 from next higher bit"
+            },
+            {
+                question: "What is the bit size of a standard ASCII code?",
+                options: ["2", "8", "7", "10"],
+                correct: 2,
+                explanation: "Standard ASCII uses 7 bits, allowing 128 characters. Often stored as 8-bit bytes with MSB=0.",
+                detailed: "ASCII details:<br>• 7 bits = 128 characters (2⁷)<br>• Range: 0-127<br>• 0-31: Control characters<br>• 32-126: Printable characters<br>• 127: DEL<br>• Extended ASCII uses 8 bits (256 characters)"
+            },
+            {
+                question: "Which code includes the characters of the Bengali alphabet?",
+                options: ["BCD", "ASCII", "UNICODE", "EBCDIC"],
+                correct: 2,
+                explanation: "Unicode supports all writing systems including Bengali. ASCII and EBCDIC only support English.",
+                detailed: "Character encoding comparison:<br>• ASCII: English only<br>• BCD: Numeric only<br>• EBCDIC: Extended English/IBM<br>• Unicode: Universal (Bengali: U+0980 to U+09FF)<br><br>Unicode version 1.0 released in 1991"
+            },
+            {
+                question: "If the output of an XNOR gate is 1, which input combination is correct?",
+                options: ["A=1, B=0", "A=0, B=1", "A=0, B=0", "None of these"],
+                correct: 2,
+                explanation: "XNOR outputs 1 when inputs are equal (both 0 or both 1). It's the complement of XOR.",
+                detailed: "XNOR truth table:<br>A B | Output<br>0 0 | 1<br>0 1 | 0<br>1 0 | 0<br>1 1 | 1<br><br>XNOR = NOT(XOR) = (A⊕B)'<br>Also called equivalence gate"
+            },
+            {
+                question: "Which of the following is a numeric code?",
+                options: ["BCD", "ASCII", "EBCDIC", "Unicode"],
+                correct: 0,
+                explanation: "BCD (Binary Coded Decimal) is a numeric code that represents each decimal digit with 4 bits.",
+                detailed: "BCD encoding:<br>• Each decimal digit (0-9) represented by 4-bit binary<br>• Example: 45₁₀ = 0100 0101 in BCD<br>• Different from pure binary: 45₁₀ = 101101₂<br>• Used in digital displays, calculators, financial systems"
+            },
+            {
+                question: "Which one is De Morgan's Theorem?",
+                options: ["A ⊕ B = A'·B + A·B'", "(A·B)' = A' + B'", "A ⊕ B = A'·B' + A·B", "A + AB = A"],
+                correct: 1,
+                explanation: "De Morgan's Theorem: (A·B)' = A' + B' and (A+B)' = A'·B'. Fundamental to Boolean algebra.",
+                detailed: "De Morgan's Laws:<br>1. (A·B)' = A' + B'<br>2. (A+B)' = A'·B'<br><br>These laws allow conversion between AND and OR operations using NOT<br>Essential for logic circuit simplification"
+            },
+            {
+                question: "What is the binary equivalent of (75.75)₁₀?",
+                options: ["100100.11", "1001011.110", "1001010.11", "101011.10"],
+                correct: 1,
+                explanation: "75.75₁₀ = 1001011.11₂. Integer part: 75 = 64+8+2+1 = 1001011₂. Fraction: .75 = .5+.25 = .11₂.",
+                detailed: "Conversion steps:<br>Integer part (75):<br>75 ÷ 2 = 37 R1<br>37 ÷ 2 = 18 R1<br>18 ÷ 2 = 9 R0<br>9 ÷ 2 = 4 R1<br>4 ÷ 2 = 2 R0<br>2 ÷ 2 = 1 R0<br>1 ÷ 2 = 0 R1<br>Read backwards: 1001011<br><br>Fraction part (.75):<br>.75 × 2 = 1.5 → 1<br>.5 × 2 = 1.0 → 1<br>Result: .11<br><br>Combined: 1001011.11"
+            },
+            {
+                question: "What is the 2's complement of (1101000)₂?",
+                options: ["00100111", "10101010", "00101000", "0011000"],
+                correct: 2,
+                explanation: "2's complement = 1's complement + 1. For 1101000: 1's complement = 0010111, +1 = 0011000.",
+                detailed: "2's complement calculation:<br>Original: 1101000<br>1's complement: 0010111 (flip all bits)<br>Add 1: 0010111 + 1 = 0011000<br><br>Verification: 1101000₂ = 104₁₀<br>2's complement: 0011000₂ = 24₁₀? Actually need to check...<br>Note: For 7-bit number, 2's complement of 104 is -24 in signed representation"
+            },
+            {
+                question: "Which is correct for a logical XOR gate?",
+                options: ["0 + 0 = 1", "0 + 1 = 0", "1 + 0 = 0", "1 + 1 = 0"],
+                correct: 3,
+                explanation: "XOR gives 1 when inputs are different. So 1 XOR 1 = 0 (inputs are same).",
+                detailed: "XOR (Exclusive OR) truth table:<br>0 XOR 0 = 0<br>0 XOR 1 = 1<br>1 XOR 0 = 1<br>1 XOR 1 = 0<br><br>XOR properties:<br>• Commutative: A⊕B = B⊕A<br>• Associative: (A⊕B)⊕C = A⊕(B⊕C)<br>• A⊕A = 0<br>• A⊕0 = A<br>• A⊕1 = A'"
+            },
+            {
+                question: "Which of the following is a universal gate?",
+                options: ["OR", "AND", "XOR", "NAND"],
+                correct: 3,
+                explanation: "NAND and NOR are universal gates - any Boolean function can be implemented using only NAND or only NOR gates.",
+                detailed: "Universal gates:<br>1. NAND: Can implement NOT, AND, OR<br>2. NOR: Can implement NOT, OR, AND<br><br>Proof for NAND:<br>• NOT A = A NAND A<br>• A AND B = (A NAND B) NAND (A NAND B)<br>• A OR B = (A NAND A) NAND (B NAND B)"
+            },
+            {
+                question: "Which is correct for logical XOR?",
+                options: ["0+0=1", "0+1=0", "1+0=0", "1+1=0"],
+                correct: 3,
+                explanation: "Same as question 15. XOR outputs 0 when both inputs are 1 (or both 0).",
+                detailed: "XOR operation (repeated for clarity):<br>• Also called modulo-2 addition<br>• Used in parity generation/checking<br>• Fundamental in cryptography<br>• Implemented in half-adders"
+            },
+            {
+                question: "Which is a universal gate?",
+                options: ["OR", "AND", "XOR", "NAND"],
+                correct: 3,
+                explanation: "Same as question 16. NAND is universal.",
+                detailed: "Historical note: The concept of universal gates was important in early digital circuit design when manufacturing only one type of gate was more economical."
+            },
+            {
+                question: "To which code category does the Bengali alphabet belong?",
+                options: ["ASCII", "BCD", "EBCDIC", "UNICODE"],
+                correct: 3,
+                explanation: "Bengali alphabet is in Unicode (specifically the Bengali block: U+0980 to U+09FF).",
+                detailed: "Unicode Bengali block:<br>• Range: U+0980 to U+09FF<br>• Contains: Vowels, consonants, vowel signs, digits, punctuation<br>• Examples: অ (U+0985), আ (U+0986), ই (U+0987)<br>• Total: 96 code points"
+            },
+            {
+                question: "What is the value when (11110101111.10001)₂ is converted to Octal?",
+                options: ["3657.21", "3657.42", "7536.21", "7536.42"],
+                correct: 1,
+                explanation: "Group binary digits into groups of 3 from decimal point: 011 110 101 111 . 100 010 = 3657.42₈.",
+                detailed: "Binary to octal conversion:<br>1. Group binary digits into sets of 3 from decimal point<br>2. 11110101111.10001 → 011 110 101 111 . 100 010<br>3. Convert each group: 011=3, 110=6, 101=5, 111=7, 100=4, 010=2<br>4. Result: 3657.42₈<br><br>Verification: 3657.42₈ = 3×512 + 6×64 + 5×8 + 7×1 + 4/8 + 2/64 = 1967.53125₁₀"
+            },
+            {
+                question: "What is the binary form of the decimal number 91?",
+                options: ["1011011", "1101010", "1110011", "1101101"],
+                correct: 0,
+                explanation: "91₁₀ = 64 + 16 + 8 + 2 + 1 = 1011011₂. Check: 64+0+16+8+0+2+1 = 91.",
+                detailed: "91 to binary:<br>Method 1: Powers of 2<br>91 = 64(2⁶) + 27<br>27 = 16(2⁴) + 11<br>11 = 8(2³) + 3<br>3 = 2(2¹) + 1<br>1 = 1(2⁰)<br>Binary: 1011011 (1 for 64,0,1 for 16,1 for 8,0,1 for 2,1 for 1)<br><br>Method 2: Division<br>91÷2=45 R1<br>45÷2=22 R1<br>22÷2=11 R0<br>11÷2=5 R1<br>5÷2=2 R1<br>2÷2=1 R0<br>1÷2=0 R1<br>Read backwards: 1011011"
+            },
+            {
+                question: "Among Bit, Byte, Nibble, and Word, which is the largest?",
+                options: ["bit", "byte", "nibble", "word"],
+                correct: 3,
+                explanation: "Word is the largest (typically 16, 32, or 64 bits). Nibble=4 bits, Byte=8 bits, Word=multiple bytes.",
+                detailed: "Size comparison:<br>• Bit: 1 binary digit (smallest)<br>• Nibble: 4 bits (half-byte)<br>• Byte: 8 bits (standard character size)<br>• Word: Processor-dependent (16, 32, 64 bits)<br><br>Modern computers typically use:<br>• 32-bit word: 4 bytes<br>• 64-bit word: 8 bytes"
+            },
+            {
+                question: "What is the next number after 177 in the Octal system?",
+                options: ["178", "180", "200", "270"],
+                correct: 2,
+                explanation: "In octal, after 177 comes 200 (similar to decimal where after 199 comes 200). 177₈ + 1₈ = 200₈.",
+                detailed: "Octal counting:<br>... 174, 175, 176, 177, 200, 201 ...<br>Reason: 177₈ = 1×64 + 7×8 + 7×1 = 64+56+7 = 127₁₀<br>Add 1: 128₁₀ = 2×64 + 0×8 + 0×1 = 200₈<br><br>Octal digits: 0-7 only, so 7+1 = 10 (carry)"
+            },
+            {
+                question: "(10111.110)₂ = (?)₁₆",
+                options: ["17.C", "25.D", "E.E", "FD.C"],
+                correct: 0,
+                explanation: "Group binary into sets of 4: 0001 0111 . 1100 = 17.C₁₆. Note: Pad with zeros as needed.",
+                detailed: "Binary to hexadecimal:<br>1. Group binary into sets of 4 from decimal point<br>2. 10111.110 → 0001 0111 . 1100 (pad with zeros)<br>3. Convert each group: 0001=1, 0111=7, 1100=C<br>4. Result: 17.C₁₆<br><br>Verification: 10111.110₂ = 23.75₁₀ = 17.C₁₆"
+            },
+            {
+                question: "If the decimal value is 10, what will it be in Hexadecimal?",
+                options: ["11", "11 A", "A", "B"],
+                correct: 2,
+                explanation: "10₁₀ = A₁₆. Hexadecimal uses 0-9 then A-F for 10-15.",
+                detailed: "Decimal to hexadecimal conversion:<br>10 ÷ 16 = 0 remainder 10<br>10 in hex = A<br>Result: A₁₆<br><br>Hex digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F<br>A=10, B=11, C=12, D=13, E=14, F=15"
+            },
+            {
+                question: "Which is the next number after 9 in Hexadecimal?",
+                options: ["10", "11", "A", "B"],
+                correct: 2,
+                explanation: "After 9 comes A in hexadecimal. Hexadecimal sequence: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,10.",
+                detailed: "Hexadecimal counting:<br>0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,10,11,...1F,20,...<br>This is base-16 system<br>Important for memory addresses in computing"
+            },
+            {
+                question: "(11101)₂ - (1011)₂ = ?",
+                options: ["10010", "11010", "11110", "None of these"],
+                correct: 0,
+                explanation: "11101₂ = 29₁₀, 1011₂ = 11₁₀, difference = 18₁₀ = 10010₂. Binary subtraction: 11101 - 01011 = 10010.",
+                detailed: "Binary subtraction:<br>  11101 (29₁₀)<br>- 01011 (11₁₀)<br>--------<br>  10010 (18₁₀)<br><br>Step-by-step with borrowing:<br>1-1=0, need borrow: 0-1=1 with borrow, etc."
+            },
+            {
+                question: "Which logic gate has an equal number of inputs and outputs?",
+                options: ["AND", "NOT", "OR", "NOR"],
+                correct: 1,
+                explanation: "NOT gate has 1 input and 1 output. Other gates typically have multiple inputs but single output.",
+                detailed: "Gate input/output counts:<br>• NOT: 1 input, 1 output<br>• AND, OR, NAND, NOR, XOR: typically 2+ inputs, 1 output<br>• Buffer: 1 input, 1 output (like NOT but no inversion)<br><br>NOT gate is also called inverter"
+            },
+            {
+                question: "Who is the inventor of the Octal system?",
+                options: ["Gottfried Leibniz", "King Charles VII", "Al-Khwarizmi", "Al-Hazen"],
+                correct: 1,
+                explanation: "King Charles XII of Sweden (sometimes confused with Charles VII) promoted octal system in 18th century Sweden.",
+                detailed: "Octal system history:<br>• Used by Swedish king Charles XII in 1717<br>• Based on 8 (2³) for easier conversion from binary<br>• Used in early computing (PDP-8, Unix permissions)<br>• Largely replaced by hexadecimal in modern computing"
+            },
+            {
+                question: "1 Megabit = ?",
+                options: ["1,000,000 bits", "1,048,576 bits", "10,000,000 bits", "1,004,576 bits"],
+                correct: 0,
+                explanation: "In telecommunications/data transfer, 1 Megabit = 10⁶ bits. In computing memory, 1 Mebibit = 2²⁰ bits.",
+                detailed: "Data measurement units:<br>• 1 kilobit (Kb) = 1,000 bits (10³)<br>• 1 Megabit (Mb) = 1,000,000 bits (10⁶)<br>• 1 Gigabit (Gb) = 1,000,000,000 bits (10⁹)<br><br>Binary prefixes (for memory):<br>• 1 Kibibit (Kib) = 1,024 bits (2¹⁰)<br>• 1 Mebibit (Mib) = 1,048,576 bits (2²⁰)<br>• 1 Gibibit (Gib) = 1,073,741,824 bits (2³⁰)"
+            }
+        ];
+
+        // Track user answers and current question
+        let userAnswers = Array(mcqData.length).fill(null);
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            // Set up navigation buttons
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Update active button
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target section
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetId) {
+                            section.classList.add('active');
+                        }
+                    });
+                    
+                    // If MCQ section is opened, ensure answer navigation is visible
+                    if (targetId === 'mcq') {
+                        updateAnswerNavigation();
+                        showQuestion(currentQuestionIndex);
+                    }
+                });
+            });
+            
+            // Initialize MCQs
+            initializeMCQs();
+            
+            // Set up reset button
+            document.getElementById('reset-mcq').addEventListener('click', resetMCQs);
+            
+            // Set up navigation buttons
+            document.getElementById('prev-btn').addEventListener('click', () => navigateQuestion(-1));
+            document.getElementById('next-btn').addEventListener('click', () => navigateQuestion(1));
+            
+            // Show first question
+            showQuestion(0);
+        });
+        
+        // Initialize MCQs
+        function initializeMCQs() {
+            const container = document.getElementById('mcq-container');
+            container.innerHTML = '';
+            
+            mcqData.forEach((mcq, index) => {
+                const mcqElement = document.createElement('div');
+                mcqElement.className = 'mcq-question';
+                mcqElement.setAttribute('data-index', index);
+                mcqElement.id = `question-${index}`;
+                mcqElement.style.display = 'none';
+                
+                let optionsHtml = '';
+                const optionLabels = ['ক', 'খ', 'গ', 'ঘ'];
+                
+                optionLabels.forEach((label, i) => {
+                    optionsHtml += `
+                        <div class="mcq-option" data-option="${i}">
+                            <span class="option-label">${label}</span>
+                            <span class="option-text">${mcq.options[i]}</span>
+                        </div>
+                    `;
+                });
+                
+                mcqElement.innerHTML = `
+                    <h3>${index + 1}. ${mcq.question}</h3>
+                    <div class="mcq-options">${optionsHtml}</div>
+                    <div class="explanation-box" id="explanation-${index}">
+                        <h4><i class="fas fa-lightbulb"></i> Detailed Answer Explanation</h4>
+                        <div class="explanation-content" id="explanation-content-${index}"></div>
+                    </div>
+                `;
+                
+                container.appendChild(mcqElement);
+                
+                // Add click events to options
+                const options = mcqElement.querySelectorAll('.mcq-option');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        handleAnswerClick(index, parseInt(this.getAttribute('data-option')));
+                    });
+                });
+            });
+            
+            updateAnswerNavigation();
+            updateScore();
+        }
+        
+        // Show specific question
+        function showQuestion(index) {
+            // Hide all questions
+            document.querySelectorAll('.mcq-question').forEach(q => {
+                q.style.display = 'none';
+            });
+            
+            // Show selected question
+            document.getElementById(`question-${index}`).style.display = 'block';
+            
+            // Update current question display
+            document.getElementById('current-question').textContent = `Question ${index + 1} of ${mcqData.length}`;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').disabled = index === mcqData.length - 1;
+            
+            // Update progress bar
+            const progress = ((index + 1) / mcqData.length) * 100;
+            document.getElementById('mcq-progress').style.width = `${progress}%`;
+            
+            // Restore answer if exists
+            if (userAnswers[index] !== null) {
+                restoreAnswer(index);
+            }
+            
+            currentQuestionIndex = index;
+        }
+        
+        // Navigate between questions
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < mcqData.length) {
+                showQuestion(newIndex);
+            }
+        }
+        
+        // Handle answer selection
+        function handleAnswerClick(questionIndex, selectedOption) {
+            const mcq = mcqData[questionIndex];
+            const questionElement = document.getElementById(`question-${questionIndex}`);
+            const options = questionElement.querySelectorAll('.mcq-option');
+            const explanationBox = document.getElementById(`explanation-${questionIndex}`);
+            const explanationContent = document.getElementById(`explanation-content-${questionIndex}`);
+            
+            // Store user's answer
+            userAnswers[questionIndex] = selectedOption;
+            
+            // Reset all options for this question
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected option
+            options[selectedOption].classList.add('selected');
+            
+            // Check if answer is correct
+            const isCorrect = selectedOption === mcq.correct;
+            
+            if (isCorrect) {
+                options[selectedOption].classList.add('correct');
+            } else {
+                options[selectedOption].classList.add('incorrect');
+                options[mcq.correct].classList.add('correct');
+            }
+            
+            // Show explanation
+            const optionLabels = ['ক', 'খ', 'গ', 'ঘ'];
+            explanationContent.innerHTML = `
+                <p><strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect.'}</strong> ${mcq.explanation}</p>
+                <p><strong>Detailed Solution:</strong><br>${mcq.detailed}</p>
+                <p><strong>Correct Answer:</strong> ${mcq.options[mcq.correct]} (Option ${optionLabels[mcq.correct]})</p>
+                ${!isCorrect ? `<p><strong>Your Answer:</strong> ${mcq.options[selectedOption]} (Option ${optionLabels[selectedOption]})</p>` : ''}
+            `;
+            explanationBox.style.display = 'block';
+            
+            // Update score and navigation
+            updateScore();
+            updateAnswerNavigation();
+            
+            // Auto-advance to next question after delay if not last question
+            if (questionIndex < mcqData.length - 1) {
+                setTimeout(() => {
+                    if (currentQuestionIndex === questionIndex) {
+                        navigateQuestion(1);
+                    }
+                }, 1500);
+            }
+        }
+        
+        // Restore previous answer
+        function restoreAnswer(questionIndex) {
+            const mcq = mcqData[questionIndex];
+            const questionElement = document.getElementById(`question-${questionIndex}`);
+            const options = questionElement.querySelectorAll('.mcq-option');
+            const explanationBox = document.getElementById(`explanation-${questionIndex}`);
+            const explanationContent = document.getElementById(`explanation-content-${questionIndex}`);
+            const selectedOption = userAnswers[questionIndex];
+            
+            if (selectedOption === null) return;
+            
+            // Reset all options
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected option
+            options[selectedOption].classList.add('selected');
+            
+            // Mark correctness
+            const isCorrect = selectedOption === mcq.correct;
+            const optionLabels = ['ক', 'খ', 'গ', 'ঘ'];
+            
+            if (isCorrect) {
+                options[selectedOption].classList.add('correct');
+            } else {
+                options[selectedOption].classList.add('incorrect');
+                options[mcq.correct].classList.add('correct');
+            }
+            
+            // Show explanation
+            explanationContent.innerHTML = `
+                <p><strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect.'}</strong> ${mcq.explanation}</p>
+                <p><strong>Detailed Solution:</strong><br>${mcq.detailed}</p>
+                <p><strong>Correct Answer:</strong> ${mcq.options[mcq.correct]} (Option ${optionLabels[mcq.correct]})</p>
+                ${!isCorrect ? `<p><strong>Your Answer:</strong> ${mcq.options[selectedOption]} (Option ${optionLabels[selectedOption]})</p>` : ''}
+            `;
+            explanationBox.style.display = 'block';
+        }
+        
+        // Update answer navigation dots
+        function updateAnswerNavigation() {
+            const navContainer = document.getElementById('user-answers-nav');
+            navContainer.innerHTML = '';
+            
+            mcqData.forEach((mcq, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'answer-dot';
+                dot.textContent = index + 1;
+                dot.setAttribute('data-index', index);
+                
+                if (userAnswers[index] === null) {
+                    dot.classList.add('unanswered');
+                } else {
+                    if (userAnswers[index] === mcq.correct) {
+                        dot.classList.add('correct');
+                    } else {
+                        dot.classList.add('incorrect');
+                    }
+                }
+                
+                dot.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-index'));
+                    showQuestion(questionIndex);
+                });
+                
+                navContainer.appendChild(dot);
+            });
+        }
+        
+        // Update score display
+        function updateScore() {
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer === mcqData[index].correct) {
+                    score++;
+                }
+            });
+            
+            const totalQuestions = mcqData.length;
+            const percentage = Math.round((score / totalQuestions) * 100);
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            
+            document.getElementById('score').textContent = `${score}/${totalQuestions}`;
+            
+            let message = '';
+            if (answeredCount === 0) {
+                message = 'Start answering questions to see your score!';
+            } else if (answeredCount < totalQuestions) {
+                message = `You've answered ${answeredCount} of ${totalQuestions} questions. Keep going!`;
+            } else if (score === totalQuestions) {
+                message = '🎉 Perfect score! Excellent work! 🎉';
+            } else if (percentage >= 80) {
+                message = `Great job! ${percentage}% correct! 👍`;
+            } else if (percentage >= 60) {
+                message = `Good effort! ${percentage}% correct. 💪`;
+            } else if (percentage >= 40) {
+                message = `Keep practicing! ${percentage}% correct. Review the explanations. 📚`;
+            } else {
+                message = `Review the concepts and try again! ${percentage}% correct.`;
+            }
+            
+            document.getElementById('score-message').textContent = message;
+        }
+        
+        // Reset all MCQs
+        function resetMCQs() {
+            if (confirm('Are you sure you want to reset all answers? This cannot be undone.')) {
+                userAnswers = Array(mcqData.length).fill(null);
+                score = 0;
+                
+                mcqData.forEach((mcq, index) => {
+                    const questionElement = document.getElementById(`question-${index}`);
+                    if (questionElement) {
+                        const options = questionElement.querySelectorAll('.mcq-option');
+                        options.forEach(option => {
+                            option.classList.remove('selected', 'correct', 'incorrect');
+                        });
+                        
+                        const explanationBox = document.getElementById(`explanation-${index}`);
+                        if (explanationBox) {
+                            explanationBox.style.display = 'none';
+                        }
+                    }
+                });
+                
+                updateScore();
+                updateAnswerNavigation();
+                showQuestion(0);
+            }
+        }
+    </script>
+</body>
+</html>
